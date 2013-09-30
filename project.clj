@@ -13,6 +13,6 @@
                  [clj-json "0.2.0"]
                  ]
   :plugins [[lein-ring "0.8.5"]]
-  :ring {:handler tweet-speak.handler/app}
+  :ring {:handler spoiler-alert.handler/app}
   :profiles
   {:dev {:dependencies [[ring-mock "0.1.5"]]}})

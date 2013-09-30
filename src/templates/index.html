@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Tweet Speak</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <link href="css/main.css" rel="stylesheet">
+
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <script src="js/tweet.js"></script>
+  </head>
+
+  <body>
+    <div class="container-narrow">
+
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <h3 class="muted">Tweet Speak</h3>
+      </div>
+
+      <hr>
+
+      <div class="jumbotron">
+        <h1>Tweet Speak</h1>
+
+        <form class="form-signin">
+          <h2 class="form-signin-heading">Enter a twitter id</h2>
+          <input type="text" id="twitter-id" name="id" class="input-block-level width6"
+                 style="width: 180px;" placeholder="id">
+          <br>
+          <input type="text" id="black-list" name="black-list" class="input-block-level width6"
+                 style="width: 180px;" placeholder="black list">
+          <br>
+          <button id="get_timeline" class="btn btn-large btn-primary"
+                  type="submit">Generate Tweet</button>
+        </form>
+      </div>
+
+      <div id="initial">
+        <p class="lead">Hey, bro.  Welcome to the tweet-generating robot.</p>
+        <p class="lead">Enter some dude's twitter id and I'll generate a random tweet based on the style of her/his previous tweets.</p>
+        <p class="lead">Go ahead, give it a try.</p>
+      </div>
+
+      <div id="tweet">
+        <p id="tweet-body" class="lead"></p>
+      </div>
+
+      <hr>
+
+      <div class="footer">
+        <p>&copy; Company 2013</p>
+      </div>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>
