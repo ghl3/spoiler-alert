@@ -39,7 +39,7 @@
   "Get the tweets and render in the body
   of a json response"
   [id blacklist]
-  (json-response (get-timeline id blacklist)))
+  (json-response {:tweets (get-timeline id blacklist)}))
 
 
 (defroutes app-routes

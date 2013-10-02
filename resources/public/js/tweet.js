@@ -8,8 +8,7 @@ var getTweet = function(id, blackList, callback) {
 
 
 var renderTweet = function(tweet) {
-    var currentText = $("#tweet-body").text();
-    $("#tweet-body").text(currentText + " : " + tweet);
+    $("#tweet-list").append('<li>' + tweet + '</li>');
 }
 
 
@@ -21,10 +20,10 @@ $(document).ready(function() {
         $("#initial").hide();
 
         var renderTweets = function(data) {
-            console.log("Got tweet: ");
+            console.log("Got tweets: ");
             console.log(data);
             var tweets = data["tweets"];
-            $("#tweet-body").text("");
+            $("#tweet-list").empty();
             for (var i=0; i < tweets.length; ++i) {
                 console.log("Rendering tweet: " + tweets[i]);
                 renderTweet(tweets[i]);
@@ -37,7 +36,7 @@ $(document).ready(function() {
 
         console.log("Getting tweet from id: " + twitterId);
 
-        getTweet(twitterId, blackList, renderTweet);
+        getTweet(twitterId, blackList, renderTweets);
 
         return false;
     });

@@ -45,7 +45,9 @@
    out of the response"
   [user-name]
   (println (format "fetch-user-tweets %s" user-name))
-  (:body (twitter-statuses-home-timeline user-name)))
+  (let [user-tweets (:body (twitter-statuses-home-timeline user-name))]
+    (println (format "User Tweets: %s" user-tweets))
+    user-tweets))
 
 
 (defn get-tweet-texts
@@ -53,9 +55,10 @@
   from a full list of tweet responses"
   [tweets]
   (println tweets)
-  (let [bodies (map :text tweets)]
-    (println bodies)
+  (let [bodies (doall (map :text tweets))]
+    (println (format "Tweet bodies: %s" bodies))
     bodies))
+
 
 (defn ^String substring?
   "True if s contains the substring."
@@ -75,16 +78,25 @@
                black-list)))
 
 
+(defn not-blacklisted
+  "Return a function that determins
+  if a tweet is blacklasted"
+  [black-list]
+  (fn [tweet]
+    (not (matches-blacklist
+          (clojure.string/lower-case tweet)
+          black-list))))
+
+
 (defn filter-tweets
   "Remove all tweets that contain
   the black-listed words"
   [tweets black-list]
-  (let [lower-black-list (map clojure.string/lower-case black-list)]
-    (filter (fn [tweet] (not (matches-blacklist
-                              (clojure.string/lower-case tweet)
-                              black-list)))
-            tweets)))
-
+  (let [lower-black-list (map clojure.string/lower-case black-list)
+        filtered-tweets (doall (filter (not-blacklisted lower-black-list) tweets))]
+    (println "Filtered tweets: ")
+    (doall (map println filtered-tweets))
+    filtered-tweets))
 
 
 (defn get-filtered-timeline
