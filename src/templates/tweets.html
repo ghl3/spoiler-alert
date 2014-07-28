@@ -1,0 +1,14 @@
+<html>
+  <body>
+
+    {{greeting}} Welcome to example.com!
+
+    Best: <h1>{{best}}</h1>
+
+    {% for tweet in tweets%}
+    <p>
+      {{tweet.text}} ({{tweet.created_at}})
+    {% endfor %}
+
+  </body>
+</html>
