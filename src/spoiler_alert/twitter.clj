@@ -72,10 +72,19 @@
   any words in the black-list.
   Else return false"
   [string black-list]
-  (reduce #(or %1 %2)
-          (map (fn [black-word]
-                 (substring? black-word string))
-               black-list)))
+  (true? (some true?
+               (map #(substring? % string)
+                    black-list))))
+
+
+(defn matches-blacklist-2
+  "Return true if the string contains
+  any words in the black-list.
+  Else return false"
+  [string black-list]
+  (map (fn [black-word]
+         (substring? black-word string))
+       black-list))
 
 
 (defn not-blacklisted
@@ -92,16 +101,14 @@
   "Remove all tweets that contain
   the black-listed words"
   [tweets black-list]
-  (let [lower-black-list (map clojure.string/lower-case black-list)
-        filtered-tweets (doall (filter (not-blacklisted lower-black-list) tweets))]
-    (println "Filtered tweets: ")
-    (doall (map println filtered-tweets))
-    filtered-tweets))
+  (let [lower-black-list (map clojure.string/lower-case black-list)]
+    (filter (not-blacklisted lower-black-list) tweets)))
 
 
 (defn get-filtered-timeline
   "Get a user's filtered timeline"
   [user-name black-list]
+  (println (format "Black list: %s" black-list))
   (-> user-name
       fetch-user-tweets
       get-tweet-texts

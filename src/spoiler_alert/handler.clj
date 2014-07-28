@@ -19,13 +19,22 @@
    :body (json/generate-string data)})
 
 
+(defn strip-comma-split
+  "Strip whitespace and split on commas"
+  [str]
+  (let [words (clojure.string/split str #"[,]")]
+    (->> words
+        (map clojure.string/trim)
+        (filter #(not (= "" %1))))))
+
+
 (defn get-timeline
   "Fetch a user's tweets using the twitter api,
   put them in the DB, and render a response"
   [id black-list-string]
   (println (format "get-timeline-and-render-response %s %s" id black-list-string))
   (let
-      [black-list (clojure.string/split black-list-string #"\s+")
+      [black-list (strip-comma-split black-list-string)
        tweets (get-filtered-timeline id black-list)
        num-tweets (count tweets)]
     (if (= num-tweets 0)
